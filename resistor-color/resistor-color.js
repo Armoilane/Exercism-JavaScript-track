@@ -11,4 +11,4 @@ export const COLORS = [
   'white'
 ]
 
-export const colorCode = (band) => COLORS.indexOf(band)
+export const colorCode = band => COLORS.indexOf(band)
