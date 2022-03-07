@@ -1,17 +1,6 @@
-export const decodedValue = (colors) => {
-  let digits = colors.slice(0,2).map( color => BANDS.indexOf(color));
-  return digits[0] * 10 + digits[1];
-};
+import { colorCode } from '../resistor-color/resistor-color';
 
-export const BANDS = [
-  'black',
-  'brown',
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'violet',
-  'grey',
-  'white'
-]
+export const decodedValue = (colors) => {
+  return colors.slice(0,2).reduce((total, color) =>
+    total * 10 + colorCode(color), 0 );
+};
