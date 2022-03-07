@@ -1,3 +1,5 @@
+export const colorCode = band => COLORS.indexOf(band)
+
 export const COLORS = [
   'black',
   'brown',
@@ -10,5 +12,3 @@ export const COLORS = [
   'grey',
   'white'
 ]
-
-export const colorCode = band => COLORS.indexOf(band)
