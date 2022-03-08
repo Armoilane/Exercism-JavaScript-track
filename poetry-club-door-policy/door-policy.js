@@ -20,6 +20,13 @@
 // Good luck with that door policy!
 
 /**
+ * Private helper function that returns the string capitalized.
+ */
+
+const capitalize = word =>
+  word[0].toUpperCase() + word.slice(1).toLowerCase()
+
+/**
  * Respond with the correct character, given the line of the
  * poem, if this were said at the front door.
  *
@@ -38,9 +45,6 @@ export const frontDoorResponse = line => line.slice(0,1)
  */
 
 export const frontDoorPassword = word => capitalize(word)
-
-const capitalize = word => word[0].toUpperCase() +
-                           word.slice(1).toLowerCase()
 
 /**
  * Respond with the correct character, given the line of the
