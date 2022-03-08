@@ -26,9 +26,8 @@
  * @param {string} line
  * @returns {string}
  */
-export function frontDoorResponse(line) {
-  throw new Error('Implement the frontDoorResponse function');
-}
+
+export const frontDoorResponse = line => line.slice(0,1)
 
 /**
  * Format the password for the front-door, given the response
@@ -37,9 +36,11 @@ export function frontDoorResponse(line) {
  * @param {string} word the letters you responded with before
  * @returns {string} the front door password
  */
-export function frontDoorPassword(word) {
-  throw new Error('Implement the frontDoorPassword function');
-}
+
+export const frontDoorPassword = word => capitalize(word)
+
+const capitalize = word => word[0].toUpperCase() +
+                           word.slice(1).toLowerCase()
 
 /**
  * Respond with the correct character, given the line of the
@@ -48,9 +49,8 @@ export function frontDoorPassword(word) {
  * @param {string} line
  * @returns {string}
  */
-export function backDoorResponse(line) {
-  throw new Error('Implement the backDoorResponse function');
-}
+
+export const backDoorResponse = line => line.trim().slice(-1)
 
 /**
  * Format the password for the back door, given the response
@@ -59,6 +59,5 @@ export function backDoorResponse(line) {
  * @param {string} word the letters you responded with before
  * @returns {string} the back door password
  */
-export function backDoorPassword(word) {
-  throw new Error('Implement the backDoorPassword function');
-}
+
+export const backDoorPassword = word => capitalize(word) + ', please'
