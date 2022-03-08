@@ -72,5 +72,5 @@ export const canFreePrisoner = (
   archerIsAwake,
   prisonerIsAwake,
   petDogIsPresent
-) => petDogIsPresent === true && !archerIsAwake ||
+) => petDogIsPresent && !archerIsAwake ||
      prisonerIsAwake && !petDogIsPresent && !knightIsAwake && !archerIsAwake
