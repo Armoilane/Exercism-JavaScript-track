@@ -12,10 +12,6 @@
  */
 export const needsLicense = kind => kind ==='car' || kind === 'truck'
 
-/* export function needsLicense(kind) {
-  return kind === 'car' || kind === 'truck'
-}
- */
 /**
  * Helps choosing between two options by recommending the one that
  * comes first in dictionary order.
@@ -31,7 +27,6 @@ export function chooseVehicle(option1, option2) {
   } else {
     recommendation = option2
   }
-
   return `${recommendation} is clearly the better choice.`
 }
 
