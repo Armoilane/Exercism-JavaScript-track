@@ -25,7 +25,13 @@ export const needsLicense = kind => kind ==='car' || kind === 'truck'
  * @returns {string} a sentence of advice which option to choose
  */
 export function chooseVehicle(option1, option2) {
-  let recommendation = option1 < option2 ? option1 : option2
+  let recommendation = ''
+  if (option1 < option2) {
+    recommendation = option1
+  } else {
+    recommendation = option2
+  }
+
   return `${recommendation} is clearly the better choice.`
 }
 
