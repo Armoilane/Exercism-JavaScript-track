@@ -50,7 +50,7 @@ const fullRateDays = (ratePerHour, numDays) =>
   dayRate(ratePerHour) * (numDays % 22)
 
 const discountedMonthRate = (ratePerHour, numDays, discount) =>
-  Math.trunc(numDays / 22) * dayRate(ratePerHour) * 22 * (1-discount)
+  Math.trunc(numDays / 22) * dayRate(ratePerHour) * 22 * (1 - discount)
 
 export const priceWithMonthlyDiscount = (ratePerHour, numDays, discount) =>
   Math.ceil(
