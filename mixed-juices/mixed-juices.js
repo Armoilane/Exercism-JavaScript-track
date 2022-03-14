@@ -11,7 +11,19 @@
  * @returns {number} time in minutes
  */
 export function timeToMixJuice(name) {
-  throw new Error('Please implement the timeToMixJuice function');
+  switch(name) {
+    case 'Pure Strawberry Joy': return 0.5
+    case 'Energizer':
+      return 1.5
+    case 'Green Garden':
+      return 1.5
+    case 'Tropical Island':
+      return 3
+    case 'All or Nothing':
+      return 5
+    default:
+      return 2.5
+  }
 }
 
 /**
@@ -22,8 +34,23 @@ export function timeToMixJuice(name) {
  * @param {string[]} limes
  * @returns {number} number of limes cut
  */
+const wedgesInLime = { small: 6, medium: 8, large: 10 }
+
 export function limesToCut(wedgesNeeded, limes) {
-  throw new Error('Please implement the limesToCut function');
+  let wedgesCut = 0
+  let limecount = 0
+  do {
+    if (wedgesNeeded === 0 || limes.length === 0) {
+      break
+    }
+    if (limes[limecount] === undefined) {
+      break
+    }
+    limecount++
+    wedgesCut += wedgesInLime[limes[limecount-1]]
+  } while (wedgesCut < wedgesNeeded)
+
+  return limecount
 }
 
 /**
@@ -34,5 +61,8 @@ export function limesToCut(wedgesNeeded, limes) {
  * @returns {string[]} remaining orders after the time is up
  */
 export function remainingOrders(timeLeft, orders) {
-  throw new Error('Please implement the remainingOrders function');
+  while ( timeLeft > 0) {
+    timeLeft -=timeToMixJuice(orders.shift())
+  }
+  return orders
 }
