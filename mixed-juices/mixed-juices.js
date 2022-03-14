@@ -48,10 +48,7 @@ export function limesToCut(wedgesNeeded, limes) {
   let limecount = 0
 
   while (wedgesWaiting < wedgesNeeded) {
-    if (wedgesNeeded === 0) {
-      break
-    }
-    if (limes[limecount] === undefined) {
+    if (wedgesNeeded === 0 || limes[limecount] === undefined) {
       break
     }
     wedgesWaiting += wedgesInLime[limes[limecount]]
