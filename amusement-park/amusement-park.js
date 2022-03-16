@@ -10,12 +10,7 @@
  * @returns {Visitor} the visitor that was created
  */
 export function createVisitor(name, age, ticketId) {
-  let visitor = {
-    name: name,
-    age: age,
-    ticketId: ticketId
-  }
-  return visitor
+  return { name, age, ticketId }
 }
 
 /**
@@ -38,15 +33,13 @@ export function revokeTicket(visitor) {
  */
 export function ticketStatus(tickets, ticketId) {
   let visitor = tickets[ticketId]
-  if (visitor) {
-    return `sold to ${visitor}`
-  }
   if (visitor === null) {
     return 'not sold'
   }
   if (visitor === undefined) {
     return 'unknown ticket id'
   }
+  return `sold to ${visitor}`
 }
 
 /**
