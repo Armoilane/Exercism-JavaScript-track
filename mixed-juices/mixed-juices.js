@@ -52,14 +52,6 @@ export function limesToCut(wedgesNeeded, limes) {
       wedgesWaiting += wedgesInLime[limes[limecount]]
       limecount ++
   }
-
-/*   while (wedgesWaiting < wedgesNeeded) {
-    if (wedgesNeeded === 0 || limes[limecount] === undefined) {
-      break
-    }
-    wedgesWaiting += wedgesInLime[limes[limecount]]
-    limecount++
-  } */
   return limecount
 }
 
