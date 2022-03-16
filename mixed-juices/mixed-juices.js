@@ -47,13 +47,19 @@ export function limesToCut(wedgesNeeded, limes) {
   let wedgesWaiting = 0
   let limecount = 0
 
-  while (wedgesWaiting < wedgesNeeded) {
+  while ((wedgesWaiting < wedgesNeeded) &&
+    (wedgesNeeded >= 0 && limes[limecount] !== undefined)) {
+      wedgesWaiting += wedgesInLime[limes[limecount]]
+      limecount ++
+  }
+
+/*   while (wedgesWaiting < wedgesNeeded) {
     if (wedgesNeeded === 0 || limes[limecount] === undefined) {
       break
     }
     wedgesWaiting += wedgesInLime[limes[limecount]]
     limecount++
-  }
+  } */
   return limecount
 }
 
@@ -65,10 +71,7 @@ export function limesToCut(wedgesNeeded, limes) {
  * @returns {string[]} remaining orders after the time is up
  */
 export function remainingOrders(timeLeft, orders) {
-  while (timeLeft > 0) {
-    if (orders.length === 0) {
-      break
-    }
+  while (timeLeft > 0 && orders.length !== 0) {
     timeLeft -= timeToMixJuice(orders.shift())
   }
   return orders
