@@ -63,7 +63,7 @@ export function limesToCut(wedgesNeeded, limes) {
  * @returns {string[]} remaining orders after the time is up
  */
 export function remainingOrders(timeLeft, orders) {
-  while (timeLeft > 0 && orders.length !== 0) {
+  while (timeLeft > 0 && orders.length > 0) {
     timeLeft -= timeToMixJuice(orders.shift())
   }
   return orders
