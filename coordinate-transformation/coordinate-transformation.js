@@ -62,14 +62,15 @@ import { cp } from "fs"
  *  if the arguments are the same on subsequent calls, or compute a new result if they are different.
  */
  export function memoizeTransform(f) {
-  let memoizedInputCoordinates = []
-  let memoizedResultCoordinates = []
-  const transform = function(x, y) {
-    if( memoizedInputCoordinates !== [x, y] ) {
-      memoizedInputCoordinates = [x, y]
-      // console.log(memoizedInputCoordinates)  // These are stored ok
-      return f(x, y)
+  let cache = {}
+  return function(x, y) {
+    let key = [x, y].toString()
+    if (key in cache) {
+      return cache[key]
     }
+    let result = f(x, y)
+    cache = {}
+    cache[key] = result
+    return result
   }
-  return transform
 }
