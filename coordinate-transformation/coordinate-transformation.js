@@ -17,8 +17,7 @@ import { cp } from "fs"
  *  translated coordinate pair in the form [x, y]
  */
  export function translate2d(dx, dy) {
-  const translated = function(x, y) { return [x+dx, y+dy] }
-  return translated
+  return (x, y) => [x+dx, y+dy]
 }
 
 /**
@@ -32,8 +31,7 @@ import { cp } from "fs"
  *  scaled coordinate pair in the form [x, y]
  */
  export function scale2d(sx, sy) {
-  const scaled = function(x, y) { return [x*sx, y*sy] }
-  return scaled
+   return (x, y) => [x*sx, y*sy]
 }
 
 /**
@@ -47,9 +45,7 @@ import { cp } from "fs"
  *  transformed coordinate pair in the form [x, y]
  */
  export function composeTransform(f, g) {
-  const fFunc = function(x, y) { return f(x, y) }
-  const gFunc = function(x, y) { return g(fFunc(x, y)[0], fFunc(x, y)[1]) }
-  return gFunc
+  return (x, y) => g(...f(x,y))
 }
 
 /**
@@ -63,7 +59,7 @@ import { cp } from "fs"
  */
  export function memoizeTransform(f) {
   let cache = {}
-  return function(x, y) {
+  return (x, y) => {
     let key = [x, y].toString()
     if (key in cache) {
       return cache[key]
