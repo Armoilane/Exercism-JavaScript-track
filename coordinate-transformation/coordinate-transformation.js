@@ -60,7 +60,7 @@ import { cp } from "fs"
  export function memoizeTransform(f) {
   let cache = {}
   return (x, y) => {
-    let key = [x, y].toString()
+    let key = `${[x, y]}`
     if (key in cache) {
       return cache[key]
     }
