@@ -60,10 +60,11 @@ import { cp } from "fs"
  export function memoizeTransform(f) {
   let cachedCoords, cachedResult
   return (x, y) => {
-    if (cachedCoords === `${[x, y]}`) {
+    let inputCoordinates = `${x},${y}`
+    if (cachedCoords === inputCoordinates ) {
       return cachedResult
     }
-    cachedCoords = `${[x, y]}`
+    cachedCoords = inputCoordinates
     return cachedResult = f(x, y)
   }
 }
