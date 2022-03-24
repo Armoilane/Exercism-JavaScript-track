@@ -1,4 +1,4 @@
 .git
 .exercism
 node_modules
-
+yarn-error.log
