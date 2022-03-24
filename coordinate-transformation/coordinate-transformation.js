@@ -58,13 +58,15 @@ import { cp } from "fs"
  *  if the arguments are the same on subsequent calls, or compute a new result if they are different.
  */
  export function memoizeTransform(f) {
-  let cachedCoords, cachedResult
+  let cachedInput = ''
+  let cachedResult = ''
   return (x, y) => {
     let inputCoordinates = `${x},${y}`
-    if (cachedCoords === inputCoordinates ) {
+    if (cachedInput === inputCoordinates ) {
       return cachedResult
     }
-    cachedCoords = inputCoordinates
-    return cachedResult = f(x, y)
+    cachedInput = inputCoordinates
+    cachedResult = f(x, y)
+    return cachedResult
   }
 }
