@@ -54,7 +54,7 @@ export function graduationFor(name, year) {
  */
 
 export function costOf(sign, currency) {
-  let characherCount = sign.split("").length()
-  let signCost = 20 + 0.2*characterCount
-  return `Your sign costs ${signCost} ${currency}s.`
+  let characterCost = 2 * sign.split('').length
+  let totalSignCost = 20 + characterCost
+  return `Your sign costs ${totalSignCost}.00 ${currency}.`
 }
