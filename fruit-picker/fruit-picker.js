@@ -16,8 +16,7 @@ import { checkStatus, checkInventory } from './grocer';
  * @return {boolean}
  */
 export function isServiceOnline() {
-  const serciveStatus = function (status) { return status === 'ONLINE' }
-  return checkStatus(serciveStatus)
+  return checkStatus(status => status === 'ONLINE')
 }
 
 /**
