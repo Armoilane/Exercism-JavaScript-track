@@ -21,16 +21,12 @@ export function seeingDouble(deck) {
  * @returns {number[]} deck with triplicate 3s
  */
 export function threeOfEachThree(deck) {
-  let indexesOfThrees = []
-  deck.map((card, index) => {
-    if (card === 3) {
-      indexesOfThrees.push(index)
-    }
-  })
-  let reversedIndexes = indexesOfThrees.reverse()
-  reversedIndexes.forEach(index => deck.splice(index, 0, 3, 3))
-  return deck
+  return deck.reduce((filledDeck, card) => {
+    card === 3 ? filledDeck.push(card, card, card) : filledDeck.push(card)
+    return filledDeck
+  }, [])
 }
+
 
 /**
  * Extracts the middle two cards from a deck.
@@ -51,7 +47,6 @@ export function middleTwo(deck) {
  *
  * @returns {number[]} transformed deck
  */
-
 export function sandwichTrick(deck) {
   let firstCard = deck.shift()
   let lastCard = deck.pop()
@@ -79,17 +74,7 @@ export function twoIsSpecial(deck) {
  * @returns {number[]} ordered deck
  */
 export function perfectlyOrdered(deck) {
-  return deck.sort((a, b) => {
-    if (a < b) {
-      return -1
-    }
-
-    if (a > b) {
-      return 1
-    }
-
-    return 0
-  })
+  return deck.sort((a, b) => a - b)
 }
 
 /**
