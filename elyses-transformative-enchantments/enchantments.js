@@ -1,5 +1,7 @@
 // @ts-check
 
+//import { splice } from "core-js/core/array"
+
 /**
  * Double every card in the deck.
  *
@@ -8,7 +10,7 @@
  * @returns {number[]} deck with every card doubled
  */
 export function seeingDouble(deck) {
-  throw new Error('Implement the seeingDouble function');
+  return deck.map(card => card * 2)
 }
 
 /**
@@ -19,7 +21,15 @@ export function seeingDouble(deck) {
  * @returns {number[]} deck with triplicate 3s
  */
 export function threeOfEachThree(deck) {
-  throw new Error('Implement the threeOfEachThree function');
+  let indexesOfThrees = []
+  deck.map((card, index) => {
+    if (card === 3) {
+      indexesOfThrees.push(index)
+    }
+  })
+  let reversedIndexes = indexesOfThrees.reverse()
+  reversedIndexes.forEach(index => deck.splice(index, 0, 3, 3))
+  return deck
 }
 
 /**
@@ -31,7 +41,7 @@ export function threeOfEachThree(deck) {
  * @returns {number[]} deck with only two middle cards
  */
 export function middleTwo(deck) {
-  throw new Error('Implement the middleTwo function');
+  return deck.splice(4,2)
 }
 
 /**
@@ -43,7 +53,11 @@ export function middleTwo(deck) {
  */
 
 export function sandwichTrick(deck) {
-  throw new Error('Implement the sandwichTrick function');
+  let firstCard = deck.shift()
+  let lastCard = deck.pop()
+  let midDeck = deck.length / 2
+  deck.splice(midDeck, 0, lastCard, firstCard)
+  return deck
 }
 
 /**
@@ -54,7 +68,7 @@ export function sandwichTrick(deck) {
  * @returns {number[]} deck with only 2s
  */
 export function twoIsSpecial(deck) {
-  throw new Error('Implement the twoIsSpecial function');
+  return deck.filter(card => card === 2)
 }
 
 /**
@@ -65,7 +79,17 @@ export function twoIsSpecial(deck) {
  * @returns {number[]} ordered deck
  */
 export function perfectlyOrdered(deck) {
-  throw new Error('Implement the perfectlyOrdered function');
+  return deck.sort((a, b) => {
+    if (a < b) {
+      return -1
+    }
+
+    if (a > b) {
+      return 1
+    }
+
+    return 0
+  })
 }
 
 /**
@@ -76,5 +100,5 @@ export function perfectlyOrdered(deck) {
  * @returns {number[]} reordered deck
  */
 export function reorder(deck) {
-  throw new Error('Implement the reorder function');
+  return deck.reverse()
 }
