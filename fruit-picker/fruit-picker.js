@@ -28,8 +28,7 @@ export function isServiceOnline() {
  * @return {AvailabilityAction} the result from checkInventory
  */
 export function pickFruit(variety, quantity, callback) {
-  let query = {variety, quantity}
-  return checkInventory(query, callback)
+  return checkInventory({variety, quantity}, callback)
 }
 
 /**
@@ -44,11 +43,7 @@ export function purchaseInventoryIfAvailable(err, isAvailable) {
     throw new Error('Errororor, go eat meat, human.')
   }
 
-  if (!err && isAvailable) {
-    return 'PURCHASE'
-  }
-
-  return 'NOOP'
+  return isAvailable ? 'PURCHASE' : 'NOOP'
 }
 
 /**
