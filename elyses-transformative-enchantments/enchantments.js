@@ -22,11 +22,15 @@ export function seeingDouble(deck) {
  */
 export function threeOfEachThree(deck) {
   return deck.reduce((filledDeck, card) => {
-    card === 3 ? filledDeck.push(card, card, card) : filledDeck.push(card)
+    if (card === 3) {
+      filledDeck.push(card, card, card)
+    }
+    else {
+      filledDeck.push(card)
+    }
     return filledDeck
   }, [])
 }
-
 
 /**
  * Extracts the middle two cards from a deck.
