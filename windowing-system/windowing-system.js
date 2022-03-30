@@ -98,35 +98,25 @@ export class ProgramWindow {
   /**
    * Private method to keep the program window width in bounds
    *
-   * @param {Number} pixelWidth pixel width of the window
+   * @param {Number} newWidth pixel width of the window
    *
    * @returns {Number} width adjusted to the screen size.
    */
-  limitWindowWidth(pixelWidth) {
-    if (pixelWidth < 1) {
-      return 1
-    }
-    if (this.position.x + pixelWidth > this.screenSize.width) {
-      return this.screenSize.width - this.position.x
-    }
-    return pixelWidth
+  limitWindowWidth(newWidth) {
+    const maxWidth = this.screenSize.width - this.position.x
+    return Math.min(Math.max(newWidth, 1), maxWidth)
   }
 
   /**
    * Private method to keep the program window height in bounds
    *
-   * @param {Number} pixelHeight pixel height of the program window
+   * @param {Number} newHeight pixel height of the program window
    *
    * @returns {Number} height adjusted to the screen size.
    */
-  limitWindowHeight(pixelHeight) {
-    if (pixelHeight < 1) {
-      return 1
-    }
-    if (this.position.y + pixelHeight > this.screenSize.height) {
-      return this.screenSize.height - this.position.y
-    }
-    return pixelHeight
+  limitWindowHeight(newHeight) {
+    const maxHeight = this.screenSize.height - this.position.y
+    return Math.min(Math.max(newHeight, 1), maxHeight)
   }
 
   /**
@@ -137,8 +127,10 @@ export class ProgramWindow {
    * The program window should be kept within limits of the screen.
    */
   move(newPosition) {
-    this.position.x = this.keepWidthWithinScreen(newPosition.x)
-    this.position.y = this.keepHeigthWithinScreen(newPosition.y)
+    this.position.move(
+      this.keepWidthWithinScreen(newPosition.x),
+      this.keepHeigthWithinScreen(newPosition.y)
+    )
   }
 
   /**
@@ -155,7 +147,7 @@ export class ProgramWindow {
   /**
    * Private method to keep program window height within limits
    *
-   * @param {Number} heightPosition position of top left corner program window
+   * @param {Number} heigthPosition position of top left corner program window
    *
    * @returns {Number} y coordinate that is limited to the current screen size.
    */
@@ -164,14 +156,15 @@ export class ProgramWindow {
   }
 
   /**
-   * Private method to keep the top left corner on the screen.
+   * Private method to keep the top left corner of the program window on the screen.
+   * The top left corner of the screen is origo (0,0)
    *
    * @param {Number} coordinate position of top left corner of program window
    *
-   * @returns {Number} coordinate that is limited to the current screen size
+   * @returns {Number} coordinate that is limited to our screen's origo.
    */
   limitTopLeft(coordinate) {
-    return coordinate < 0 ? 0 : coordinate
+    return Math.max(coordinate, 0)
   }
 
   /**
@@ -183,7 +176,7 @@ export class ProgramWindow {
    */
   limitRight(coordinate) {
     const maximumX = this.screenSize.width - this.size.width
-    return coordinate > maximumX ? maximumX : coordinate
+    return Math.min(coordinate, maximumX)
   }
 
   /**
@@ -195,7 +188,7 @@ export class ProgramWindow {
    */
   limitBottom(coordinate) {
     const maximumY = this.screenSize.height - this.size.height
-    return coordinate > maximumY ? maximumY : coordinate
+    return Math.min(coordinate, maximumY)
   }
 }
 
