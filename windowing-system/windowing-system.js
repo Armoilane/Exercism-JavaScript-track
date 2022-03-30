@@ -6,7 +6,7 @@
  * @param {number} width window width in pixels
  * @param {number} height window height in pixels
  *
- * @returns what, exactly? - A new instance of Size.
+ * @returns a new instance of Size
  */
 export function Size(width = 80, height = 60) {
   this.width = width
@@ -14,12 +14,12 @@ export function Size(width = 80, height = 60) {
 }
 
 /**
- * Resizes the window.
+ * A function that resizes the window.
  *
  * @param {number} width new window width in pixels
  * @param {number} height new window height in pixels
  *
- * @returns Nothing? It just sets new window attributes.
+ * @returns Nothing for it just sets new window attributes.
  */
 Size.prototype.resize = function(width, height) {
   this.width = width
@@ -30,10 +30,10 @@ Size.prototype.resize = function(width, height) {
  * Constructor function for the Position class.
  * Stores the coordinate position of the window.
  *
- * @param {number} x coordinate of upper left corner of the window.
- * @param {number} y coordinate of upper left corner of the window.
+ * @param {number} x coordinate of upper left corner of the window
+ * @param {number} y coordinate of upper left corner of the window
  *
- * @returns A new instance of position.
+ * @returns A new instance of Position.
  */
 export function Position(x = 0, y = 0) {
   this.x = x
@@ -41,7 +41,7 @@ export function Position(x = 0, y = 0) {
 }
 
 /**
- * Moves the window to a new position
+ * Moves the window to a new position.
  *
  * @param {number} x coordinate of upper left corner of the window
  * @param {number} y coordinate of upper left corner of the window
@@ -72,6 +72,8 @@ Position.prototype.move = function (x, y) {
  * @param {Size} screenSize fixed to size 800, 600
  * @param {Size} size size of the program window
  * @param {Position} position
+ *
+ * @returns A new instance of ProgramWindow.
  */
 export class ProgramWindow {
   constructor() {
@@ -81,21 +83,22 @@ export class ProgramWindow {
   }
 
   /**
-   * Method to resize the ProgramWindow
+   * Method to resize the ProgramWindow. Calls the `resize` method
+   * of the Size class. The new size is kept within the screen limits.
    *
    * @param {Size} newSize new size for the program window
-   *
-   * Could have a function to do the < 1 check.
    */
   resize(newSize) {
-    this.size.width = this._limitWindowWidth(newSize.width)
-    this.size.height = this._limitWindowHeight(newSize.height)
+    this.size.resize(
+      this._limitWindowWidth(newSize.width),
+      this._limitWindowHeight(newSize.height)
+    )
   }
 
   /**
-   * Private method to keep the window width in bounds
+   * Private method to keep the program window width in bounds
    *
-   * @param {Number} pixelWidth pixel width of a program window
+   * @param {Number} pixelWidth pixel width of the window
    *
    * @returns {Number} width adjusted to the screen size.
    */
@@ -110,9 +113,9 @@ export class ProgramWindow {
   }
 
   /**
-   * Private method to keep the window width in bounds
+   * Private method to keep the program window height in bounds
    *
-   * @param {Number} pixelHeight pixel height of a program window
+   * @param {Number} pixelHeight pixel height of the program window
    *
    * @returns {Number} height adjusted to the screen size.
    */
@@ -127,48 +130,83 @@ export class ProgramWindow {
   }
 
   /**
-   * Method to move the window
+   * Method to move a ProgramWindow
    *
    * @param {Position} newPosition new coordinates for top left corner
    *
    * The program window should be kept within limits of the screen.
    */
   move(newPosition) {
-    let newPositiveX = this._limitTopLeft(newPosition.x)
-    let newPositiveY = this._limitTopLeft(newPosition.y)
-
-    this.position.x = this._limitRight(newPositiveX)
-    this.position.y = this._limitBottom(newPositiveY)
+    this.position.x = this._keepWidthWithinScreen(newPosition.x)
+    this.position.y = this._keepHeigthWithinScreen(newPosition.y)
   }
 
   /**
-   * Private methods to keep program window within the limits of the window.
+   * Private method to keep program window width within limits
    *
-   * @param {Number} coordinate position of edge of program window
+   * @param {Number} widthPosition position of top left corner program window
    *
-   * @returns {Number} coordinate that is limited to the current screen size.
+   * @returns {Number} x coordinate that is limited to the current screen size.
+   */
+  _keepWidthWithinScreen(widthPosition) {
+    return this._limitRight(this._limitTopLeft(widthPosition))
+  }
+
+  /**
+   * Private method to keep program window height within limits
+   *
+   * @param {Number} heightPosition position of top left corner program window
+   *
+   * @returns {Number} y coordinate that is limited to the current screen size.
+   */
+  _keepHeigthWithinScreen(heigthPosition) {
+    return this._limitBottom(this._limitTopLeft(heigthPosition))
+  }
+
+  /**
+   * Private method to keep the top left corner on the screen.
+   *
+   * @param {Number} coordinate position of top left corner of program window
+   *
+   * @returns {Number} coordinate that is limited to the current screen size
    */
   _limitTopLeft(coordinate) {
     return coordinate < 0 ? 0 : coordinate
   }
 
+  /**
+   * Private method to keep the right side on the screen.
+   *
+   * @param {Number} coordinate position of top left corner of program window
+   *
+   * @returns {Number} coordinate that is limited to the current screen size.
+   */
   _limitRight(coordinate) {
     const maximumX = this.screenSize.width - this.size.width
     return coordinate > maximumX ? maximumX : coordinate
   }
 
+  /**
+   * Private method to keep the bottom on the screen.
+   *
+   * @param {Number} coordinate position of top left corner of program window
+   *
+   * @returns {Number} coordinate that is limited to the current screen size.
+   */
   _limitBottom(coordinate) {
     const maximumY = this.screenSize.height - this.size.height
     return coordinate > maximumY ? maximumY : coordinate
   }
 }
 
+
 /**
  * This function resets the program window on to the screen.
+ * This is NOT a part of the ProgramWindow class.
  *
  * @param {ProgramWindow} programWindow an instance of.
  *
- * @returns {ProgramWindow} The same window object adjusted.
+ * @returns {ProgramWindow} The same ProgramWindow object adjusted.
  */
 export function changeWindow(programWindow) {
   programWindow.resize(new Size(400, 300))
