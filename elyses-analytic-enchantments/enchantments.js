@@ -5,6 +5,24 @@
 // implementing this exercise.
 
 /**
+ * Private function to check if a gived card is even or not
+ *
+ * @param {Number} card
+ *
+ * @returns {Boolean} true if card is even
+ */
+ const _isEven = card => card % 2 === 0
+
+ /**
+ * Private function to check if a gived card is odd or not
+ *
+ * @param {Number} card
+ *
+ * @returns {Boolean} true if card is odd
+ */
+const _isOdd = card => card % 2 !== 0
+
+/**
  * Get the position (index) of the card in the given stack
  *
  * @param {number[]} stack
@@ -36,7 +54,7 @@ export function doesStackIncludeCard(stack, card) {
  * @returns {boolean} true if all cards are even, false otherwise
  */
 export function isEachCardEven(stack) {
-  return stack.every(card => card % 2 === 0)
+  return stack.every(card => _isEven(card))
 }
 
 /**
@@ -47,7 +65,7 @@ export function isEachCardEven(stack) {
  * @returns {boolean} true if the array contains odd card, false otherwise
  */
 export function doesStackIncludeOddCard(stack) {
-  return stack.some(card => card % 2 !== 0)
+  return stack.some(card => _isOdd(card))
 }
 
 /**
@@ -58,7 +76,7 @@ export function doesStackIncludeOddCard(stack) {
  * @returns {number} the first odd value
  */
 export function getFirstOddCard(stack) {
-  return stack.find(card => card % 2 !== 0)
+  return stack.find(card => _isOdd(card))
 }
 
 /**
@@ -69,5 +87,5 @@ export function getFirstOddCard(stack) {
  * @returns {number} position of the first card that is even
  */
 export function getFirstEvenCardPosition(stack) {
-  return stack.findIndex(card => card % 2 === 0)
+  return stack.findIndex(card => _isEven(card))
 }
