@@ -24,8 +24,7 @@ export function threeOfEachThree(deck) {
   return deck.reduce((filledDeck, card) => {
     if (card === 3) {
       filledDeck.push(card, card, card)
-    }
-    else {
+    } else {
       filledDeck.push(card)
     }
     return filledDeck
