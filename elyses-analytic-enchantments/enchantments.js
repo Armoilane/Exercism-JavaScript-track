@@ -1,26 +1,22 @@
 // @ts-check
-//
-// The line above enables type checking for this file. Various IDEs interpret
-// the @ts-check directive. It will give you helpful autocompletion when
-// implementing this exercise.
 
 /**
- * Private function to check if a gived card is even or not
+ * Check if a given card is even or not
  *
  * @param {Number} card
  *
  * @returns {Boolean} true if card is even
  */
- const _isEven = card => card % 2 === 0
+ const isEven = card => card % 2 === 0
 
  /**
- * Private function to check if a gived card is odd or not
+ * Check if a given card is odd or not
  *
  * @param {Number} card
  *
  * @returns {Boolean} true if card is odd
  */
-const _isOdd = card => card % 2 !== 0
+const isOdd = card => !isEven(card)
 
 /**
  * Get the position (index) of the card in the given stack
@@ -54,7 +50,7 @@ export function doesStackIncludeCard(stack, card) {
  * @returns {boolean} true if all cards are even, false otherwise
  */
 export function isEachCardEven(stack) {
-  return stack.every(card => _isEven(card))
+  return stack.every(card => isEven(card))
 }
 
 /**
@@ -65,7 +61,7 @@ export function isEachCardEven(stack) {
  * @returns {boolean} true if the array contains odd card, false otherwise
  */
 export function doesStackIncludeOddCard(stack) {
-  return stack.some(card => _isOdd(card))
+  return stack.some(card => isOdd(card))
 }
 
 /**
@@ -76,7 +72,7 @@ export function doesStackIncludeOddCard(stack) {
  * @returns {number} the first odd value
  */
 export function getFirstOddCard(stack) {
-  return stack.find(card => _isOdd(card))
+  return stack.find(card => isOdd(card))
 }
 
 /**
@@ -87,5 +83,5 @@ export function getFirstOddCard(stack) {
  * @returns {number} position of the first card that is even
  */
 export function getFirstEvenCardPosition(stack) {
-  return stack.findIndex(card => _isEven(card))
+  return stack.findIndex(card => isEven(card))
 }
