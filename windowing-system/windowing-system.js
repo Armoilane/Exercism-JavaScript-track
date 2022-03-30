@@ -90,8 +90,8 @@ export class ProgramWindow {
    */
   resize(newSize) {
     this.size.resize(
-      this._limitWindowWidth(newSize.width),
-      this._limitWindowHeight(newSize.height)
+      this.limitWindowWidth(newSize.width),
+      this.limitWindowHeight(newSize.height)
     )
   }
 
@@ -102,7 +102,7 @@ export class ProgramWindow {
    *
    * @returns {Number} width adjusted to the screen size.
    */
-  _limitWindowWidth(pixelWidth) {
+  limitWindowWidth(pixelWidth) {
     if (pixelWidth < 1) {
       return 1
     }
@@ -119,7 +119,7 @@ export class ProgramWindow {
    *
    * @returns {Number} height adjusted to the screen size.
    */
-  _limitWindowHeight(pixelHeight) {
+  limitWindowHeight(pixelHeight) {
     if (pixelHeight < 1) {
       return 1
     }
@@ -137,8 +137,8 @@ export class ProgramWindow {
    * The program window should be kept within limits of the screen.
    */
   move(newPosition) {
-    this.position.x = this._keepWidthWithinScreen(newPosition.x)
-    this.position.y = this._keepHeigthWithinScreen(newPosition.y)
+    this.position.x = this.keepWidthWithinScreen(newPosition.x)
+    this.position.y = this.keepHeigthWithinScreen(newPosition.y)
   }
 
   /**
@@ -148,8 +148,8 @@ export class ProgramWindow {
    *
    * @returns {Number} x coordinate that is limited to the current screen size.
    */
-  _keepWidthWithinScreen(widthPosition) {
-    return this._limitRight(this._limitTopLeft(widthPosition))
+  keepWidthWithinScreen(widthPosition) {
+    return this.limitRight(this.limitTopLeft(widthPosition))
   }
 
   /**
@@ -159,8 +159,8 @@ export class ProgramWindow {
    *
    * @returns {Number} y coordinate that is limited to the current screen size.
    */
-  _keepHeigthWithinScreen(heigthPosition) {
-    return this._limitBottom(this._limitTopLeft(heigthPosition))
+  keepHeigthWithinScreen(heigthPosition) {
+    return this.limitBottom(this.limitTopLeft(heigthPosition))
   }
 
   /**
@@ -170,7 +170,7 @@ export class ProgramWindow {
    *
    * @returns {Number} coordinate that is limited to the current screen size
    */
-  _limitTopLeft(coordinate) {
+  limitTopLeft(coordinate) {
     return coordinate < 0 ? 0 : coordinate
   }
 
@@ -181,7 +181,7 @@ export class ProgramWindow {
    *
    * @returns {Number} coordinate that is limited to the current screen size.
    */
-  _limitRight(coordinate) {
+  limitRight(coordinate) {
     const maximumX = this.screenSize.width - this.size.width
     return coordinate > maximumX ? maximumX : coordinate
   }
@@ -193,7 +193,7 @@ export class ProgramWindow {
    *
    * @returns {Number} coordinate that is limited to the current screen size.
    */
-  _limitBottom(coordinate) {
+  limitBottom(coordinate) {
     const maximumY = this.screenSize.height - this.size.height
     return coordinate > maximumY ? maximumY : coordinate
   }
