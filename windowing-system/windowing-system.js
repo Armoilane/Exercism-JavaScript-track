@@ -1,6 +1,14 @@
 // @ts-check
 
 /**
+ * I have no idea how this works, but it does allow access to
+ * these Math functions without typing Math on every occasion.
+ *
+ * Must be declared outside of the class declarations.
+ */
+ const {max, min} = Math;
+
+/**
  * A constructor function for the class Size.
  *
  * @param {number} width window width in pixels
@@ -66,7 +74,7 @@ Position.prototype.move = function (x, y) {
  * values inside and object.
  */
 
-/**
+ /**
  * Class declaration with keyword `class` for ProgramWindow. -ES2015
  *
  * @param {Size} screenSize fixed to size 800, 600
@@ -104,7 +112,7 @@ export class ProgramWindow {
    */
   limitWindowWidth(newWidth) {
     const maxWidth = this.screenSize.width - this.position.x
-    return Math.min(Math.max(newWidth, 1), maxWidth)
+    return min(maxWidth, max(newWidth, 1))
   }
 
   /**
@@ -116,7 +124,7 @@ export class ProgramWindow {
    */
   limitWindowHeight(newHeight) {
     const maxHeight = this.screenSize.height - this.position.y
-    return Math.min(Math.max(newHeight, 1), maxHeight)
+    return min(maxHeight, max(newHeight, 1))
   }
 
   /**
@@ -136,71 +144,25 @@ export class ProgramWindow {
   /**
    * Private method to keep program window width within limits
    *
-   * @param {Number} widthPosition position of top left corner program window
+   * @param {Number} newX position of top left corner program window
    *
    * @returns {Number} x coordinate that is limited to the current screen size.
    */
-  keepWidthWithinScreen(widthPosition) {
-    return this.limitRightEdge(this.limitLeftEdge(widthPosition))
+  keepWidthWithinScreen(newX) {
+    const maximumX = this.screenSize.width - this.size.width
+    return min(maximumX, (max(newX, 0)))
   }
 
   /**
    * Private method to keep program window height within limits
    *
-   * @param {Number} heigthPosition position of top left corner program window
+   * @param {Number} newY position of top left corner program window
    *
    * @returns {Number} y coordinate that is limited to the current screen size.
    */
-  keepHeigthWithinScreen(heigthPosition) {
-    return this.limitBottomEdge(this.limitTopEdge(heigthPosition))
-  }
-
-  /**
-   * Private method to keep the top edge of the program window on the screen.
-   * The top left corner of the screen is origo (0,0)
-   *
-   * @param {Number} coordinate position of top left corner of program window
-   *
-   * @returns {Number} coordinate that is limited to our screen's origo.
-   */
-  limitTopEdge(coordinate) {
-    return Math.max(coordinate, 0)
-  }
-
-  /**
-   * Private method to keep the top edge of the program window on the screen.
-   * The top left corner of the screen is origo (0,0)
-   *
-   * @param {Number} coordinate position of top left corner of program window
-   *
-   * @returns {Number} coordinate that is limited to our screen's origo.
-   */
-  limitLeftEdge(coordinate) {
-    return Math.max(coordinate, 0)
-  }
-
-  /**
-   * Private method to keep the right side on the screen.
-   *
-   * @param {Number} coordinate position of top left corner of program window
-   *
-   * @returns {Number} coordinate that is limited to the current screen size.
-   */
-  limitRightEdge(coordinate) {
-    const maximumX = this.screenSize.width - this.size.width
-    return Math.min(coordinate, maximumX)
-  }
-
-  /**
-   * Private method to keep the bottom on the screen.
-   *
-   * @param {Number} coordinate position of top left corner of program window
-   *
-   * @returns {Number} coordinate that is limited to the current screen size.
-   */
-  limitBottomEdge(coordinate) {
+  keepHeigthWithinScreen(newY) {
     const maximumY = this.screenSize.height - this.size.height
-    return Math.min(coordinate, maximumY)
+    return min(maximumY, max(newY, 0))
   }
 }
 
