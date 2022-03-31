@@ -5,13 +5,25 @@
 // implementing this exercise.
 
 /**
+ * Turns a playlist array into a Set to keep things DRY
+ *
+ * @param {string[]} playlist
+ * @returns {Set}
+ */
+function toSet(array) {
+  const playSet = new Set()
+  array.map(track => playSet.add(track))
+  return playSet
+}
+
+/**
  * Removes duplicate tracks from a playlist.
  *
  * @param {string[]} playlist
  * @returns {string[]} new playlist with unique entries
  */
 export function removeDuplicates(playlist) {
-  throw new Error('Please implement the removeDuplicates function');
+  return [...toSet(playlist)]
 }
 
 /**
@@ -22,7 +34,7 @@ export function removeDuplicates(playlist) {
  * @returns {boolean} whether the track is in the playlist
  */
 export function hasTrack(playlist, track) {
-  throw new Error('Please implement the hasTrack function');
+  return toSet(playlist).has(track)
 }
 
 /**
@@ -33,18 +45,31 @@ export function hasTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function addTrack(playlist, track) {
-  throw new Error('Please implement the addTrack function');
+  return [...toSet(playlist).add(track)]
 }
 
 /**
  * Deletes a track from a playlist.
+ * Set.delete() returns boolean so can't return from that
  *
  * @param {string[]} playlist
  * @param {string} track
  * @returns {string[]} new playlist
  */
 export function deleteTrack(playlist, track) {
-  throw new Error('Please implement the deleteTrack function');
+  const playlistSet = toSet(playlist)
+  playlistSet.delete(track)
+  return [...playlistSet]
+}
+
+/**
+ * Parses the artist name from a playlist item
+ *
+ * @param {string} songName
+ * @returns {string} artist name
+ */
+function parseArtist(songName) {
+  return songName.split('- ')[1]
 }
 
 /**
@@ -54,5 +79,7 @@ export function deleteTrack(playlist, track) {
  * @returns {string[]} list of artists
  */
 export function listArtists(playlist) {
-  throw new Error('Please implement the listArtists function');
+  let artistSet = new Set
+  playlist.map(song => artistSet.add(parseArtist(song)))
+  return [...artistSet]
 }
