@@ -141,7 +141,7 @@ export class ProgramWindow {
    * @returns {Number} x coordinate that is limited to the current screen size.
    */
   keepWidthWithinScreen(widthPosition) {
-    return this.limitRight(this.limitTopLeft(widthPosition))
+    return this.limitRightEdge(this.limitLeftEdge(widthPosition))
   }
 
   /**
@@ -152,18 +152,30 @@ export class ProgramWindow {
    * @returns {Number} y coordinate that is limited to the current screen size.
    */
   keepHeigthWithinScreen(heigthPosition) {
-    return this.limitBottom(this.limitTopLeft(heigthPosition))
+    return this.limitBottomEdge(this.limitTopEdge(heigthPosition))
   }
 
   /**
-   * Private method to keep the top left corner of the program window on the screen.
+   * Private method to keep the top edge of the program window on the screen.
    * The top left corner of the screen is origo (0,0)
    *
    * @param {Number} coordinate position of top left corner of program window
    *
    * @returns {Number} coordinate that is limited to our screen's origo.
    */
-  limitTopLeft(coordinate) {
+  limitTopEdge(coordinate) {
+    return Math.max(coordinate, 0)
+  }
+
+  /**
+   * Private method to keep the top edge of the program window on the screen.
+   * The top left corner of the screen is origo (0,0)
+   *
+   * @param {Number} coordinate position of top left corner of program window
+   *
+   * @returns {Number} coordinate that is limited to our screen's origo.
+   */
+  limitLeftEdge(coordinate) {
     return Math.max(coordinate, 0)
   }
 
@@ -174,7 +186,7 @@ export class ProgramWindow {
    *
    * @returns {Number} coordinate that is limited to the current screen size.
    */
-  limitRight(coordinate) {
+  limitRightEdge(coordinate) {
     const maximumX = this.screenSize.width - this.size.width
     return Math.min(coordinate, maximumX)
   }
@@ -186,7 +198,7 @@ export class ProgramWindow {
    *
    * @returns {Number} coordinate that is limited to the current screen size.
    */
-  limitBottom(coordinate) {
+  limitBottomEdge(coordinate) {
     const maximumY = this.screenSize.height - this.size.height
     return Math.min(coordinate, maximumY)
   }
