@@ -5,25 +5,14 @@
 // implementing this exercise.
 
 /**
- * Turns a playlist array into a Set to keep things DRY
- *
- * @param {string[]} playlist
- * @returns {Set}
- */
-function toSet(array) {
-  const playSet = new Set()
-  array.map(track => playSet.add(track))
-  return playSet
-}
-
-/**
  * Removes duplicate tracks from a playlist.
+ * In other words, it just creates a Set from and array. Just like that.
  *
  * @param {string[]} playlist
  * @returns {string[]} new playlist with unique entries
  */
 export function removeDuplicates(playlist) {
-  return [...toSet(playlist)]
+  return [...new Set(playlist)]
 }
 
 /**
@@ -34,7 +23,7 @@ export function removeDuplicates(playlist) {
  * @returns {boolean} whether the track is in the playlist
  */
 export function hasTrack(playlist, track) {
-  return toSet(playlist).has(track)
+  return new Set(playlist).has(track)
 }
 
 /**
@@ -45,7 +34,7 @@ export function hasTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function addTrack(playlist, track) {
-  return [...toSet(playlist).add(track)]
+  return [...new Set(playlist).add(track)]
 }
 
 /**
@@ -57,19 +46,9 @@ export function addTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function deleteTrack(playlist, track) {
-  const playlistSet = toSet(playlist)
+  const playlistSet = new Set(playlist)
   playlistSet.delete(track)
   return [...playlistSet]
-}
-
-/**
- * Parses the artist name from a playlist item
- *
- * @param {string} songName
- * @returns {string} artist name
- */
-function parseArtist(songName) {
-  return songName.split('- ')[1]
 }
 
 /**
@@ -79,7 +58,5 @@ function parseArtist(songName) {
  * @returns {string[]} list of artists
  */
 export function listArtists(playlist) {
-  let artistSet = new Set
-  playlist.map(song => artistSet.add(parseArtist(song)))
-  return [...artistSet]
+  return [...new Set(playlist.map(title => title.split(' - ')[1]))]
 }
