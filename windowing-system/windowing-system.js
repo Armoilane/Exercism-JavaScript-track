@@ -150,7 +150,7 @@ export class ProgramWindow {
    */
   keepWidthWithinScreen(newX) {
     const maximumX = this.screenSize.width - this.size.width
-    return min(maximumX, (max(newX, 0)))
+    return min(maximumX, max(newX, 0))
   }
 
   /**
