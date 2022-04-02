@@ -1,4 +1,7 @@
 /// <reference path="./global.d.ts" />
+
+import { Console } from "console";
+
 // @ts-check
 //
 // The lines above enable type checking for this file. Various IDEs interpret
@@ -27,7 +30,7 @@ export class TranslationService {
    * @returns {Promise<string>}
    */
   free(text) {
-    throw new Error('Implement the free function');
+    return this.api.fetch(text).then(promise => promise['translation'])
   }
 
   /**
@@ -41,7 +44,8 @@ export class TranslationService {
    * @returns {Promise<string[]>}
    */
   batch(texts) {
-    throw new Error('Implement the batch function');
+    //this returns us promises that are pending. Let's have them take the next steps.
+    return texts.map(text => this.free(text))
   }
 
   /**
