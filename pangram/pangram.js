@@ -1,8 +1,10 @@
-//
-// This is only a SKELETON file for the 'Pangram' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
+const ALPHABET = Array.from('abcdefghijklmnopqrstuvwxyz')
 
-export const isPangram = () => {
-  throw new Error('Remove this statement and implement this function');
+/**
+ * Takes in a string and checks if it has every alphabet character in it.
+ * @param {String} sentence
+ * @returns {Boolean}
+ */
+export const isPangram = sentence => {
+  return ALPHABET.every(char => sentence.toLowerCase().includes(char))
 };
