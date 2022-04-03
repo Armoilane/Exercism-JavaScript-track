@@ -1,7 +1,4 @@
 /// <reference path="./global.d.ts" />
-
-import { Console } from "console";
-
 // @ts-check
 //
 // The lines above enable type checking for this file. Various IDEs interpret
@@ -30,7 +27,7 @@ export class TranslationService {
    * @returns {Promise<string>}
    */
   free(text) {
-    return this.api.fetch(text).then(promise => promise['translation'])
+    return this.api.fetch(text).then(promise => promise.translation)
   }
 
   /**
@@ -44,8 +41,17 @@ export class TranslationService {
    * @returns {Promise<string[]>}
    */
   batch(texts) {
-    //this returns us promises that are pending. Let's have them take the next steps.
-    return texts.map(text => this.free(text))
+    // this returns us promises that are pending. Let's have them take the next steps.
+    //    texts.map(text => this.free(text)) - I got this by myself, the rest I didn't
+
+    // To have this throw on an empty input
+    if (!texts.length) {
+      return Promise.reject(new BatchIsEmpty)
+    }
+
+    // Promise.all() takes an iterable of promises as an input and returns a
+    // single promise that resolves to an arry of the results of the input promises.
+    return Promise.all(texts.map(text => this.free(text)))
   }
 
   /**
@@ -58,7 +64,18 @@ export class TranslationService {
    * @returns {Promise<void>}
    */
   request(text) {
-    throw new Error('Implement the request function');
+    const promise = () => new Promise((resolve, reject) => {
+      return this.api.request(text, (result) => {
+        if (result){
+          reject(result)
+        }
+        resolve()
+      })
+    })
+
+    return promise()
+      .catch(promise)
+      .catch(promise)
   }
 
   /**
@@ -72,7 +89,16 @@ export class TranslationService {
    * @returns {Promise<string>}
    */
   premium(text, minimumQuality) {
-    throw new Error('Implement the premium function');
+    return this.api.fetch(text)
+      .catch(() => {
+        return this.request(text).then(() => this.api.fetch(text))
+      })
+      .then((result) => {
+        if (result.quality < minimumQuality) {
+          throw new QualityThresholdNotMet(text)
+        }
+        return result.translation
+      })
   }
 }
 
