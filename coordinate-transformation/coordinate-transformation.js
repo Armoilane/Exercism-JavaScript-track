@@ -59,7 +59,7 @@ export function composeTransform(f, g) {
  */
 export function memoizeTransform(f) {
   let cachedInput = ''
-  let cachedResult = ''
+  let cachedResult = [0, 0]
   return (x, y) => {
     let inputCoordinates = `${x},${y}`
     if (cachedInput === inputCoordinates ) {
