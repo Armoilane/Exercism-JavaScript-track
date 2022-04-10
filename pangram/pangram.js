@@ -1,4 +1,4 @@
-const ALPHABET = Array.from('abcdefghijklmnopqrstuvwxyz')
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 /**
  * Takes in a string and checks if it has every alphabet character in it.
@@ -6,5 +6,6 @@ const ALPHABET = Array.from('abcdefghijklmnopqrstuvwxyz')
  * @returns {Boolean}
  */
 export const isPangram = sentence => {
-  return ALPHABET.every(char => sentence.toLowerCase().includes(char))
+  const lowerCaseSentence = sentence.toLocaleLowerCase()
+  return ALPHABET.every(char => lowerCaseSentence.includes(char))
 };
