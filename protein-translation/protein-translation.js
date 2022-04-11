@@ -1,48 +1,45 @@
-const proteins = { 
-  'AUG': 'Methionine',
-  'UUU': 'Phenylalanine',
-  'UUC': 'Phenylalanine',
-  'UUA': 'Leucine',
-  'UUG': 'Leucine',
-  'UCU': 'Serine',
-  'UCC': 'Serine',
-  'UCA': 'Serine',
-  'UCG': 'Serine',
-  'UAU': 'Tyrosine',
-  'UAC': 'Tyrosine',
-  'UGU': 'Cysteine',
-  'UGC': 'Cysteine',
-  'UGG': 'Tryptophan',
-  'UAA': 'STOP',
-  'UAG': 'STOP',
-  'UGA': 'STOP',
+const PROTEINS = {
+  AUG: 'Methionine',
+  UUU: 'Phenylalanine',
+  UUC: 'Phenylalanine',
+  UUA: 'Leucine',
+  UUG: 'Leucine',
+  UCU: 'Serine',
+  UCC: 'Serine',
+  UCA: 'Serine',
+  UCG: 'Serine',
+  UAU: 'Tyrosine',
+  UAC: 'Tyrosine',
+  UGU: 'Cysteine',
+  UGC: 'Cysteine',
+  UGG: 'Tryptophan',
+  UAA: 'STOP',
+  UAG: 'STOP',
+  UGA: 'STOP',
   }
 
-export const translate = (rnaStrand) => {
-  
-  let translatedCodons = [];
+export const translate = rnaStrand => {
+  let translatedCodons = []
 
-  if ( !!rnaStrand == false ) {
-    return translatedCodons;
+  if (!rnaStrand) {
+    return translatedCodons
   }
 
-  let codons = rnaStrand.match(/.{1,3}/g);
-  
-  for ( let i = 0; i < codons.length; i++) {
-    let codon = codons[i];
-    let protein = proteins[codon];
+  let strandCodons = rnaStrand.match(/.{1,3}/g)
 
-    if ( !(codon in proteins) ) {
-      throw "Invalid codon";
+  for (let i = 0; i < strandCodons.length; i++) {
+    let protein = PROTEINS[strandCodons[i]]
+
+    if (!protein) {
+      throw "Invalid codon"
     }
 
-    if ( protein != 'STOP' ) {
-      translatedCodons.push(protein);
-    } else {
-      break;
+    if (protein === 'STOP' ) {
+      break
     }
+
+    translatedCodons.push(protein)
   }
 
-  return translatedCodons;
-  
+  return translatedCodons
 }
