@@ -23,7 +23,7 @@ export function removeDuplicates(playlist) {
  * @returns {boolean} whether the track is in the playlist
  */
 export function hasTrack(playlist, track) {
-  return new Set(playlist).has(track)
+  return removeDuplicates(playlist).includes(track)
 }
 
 /**
@@ -34,21 +34,20 @@ export function hasTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function addTrack(playlist, track) {
-  return [...new Set(playlist).add(track)]
+  return [...removeDuplicates([...playlist, track])]
 }
 
 /**
  * Deletes a track from a playlist.
- * Set.delete() returns boolean so can't return from that
+ * Now this actually filters the playlist array and rejects track before
+ * creating set utilizing removeDuplicates()
  *
  * @param {string[]} playlist
  * @param {string} track
  * @returns {string[]} new playlist
  */
 export function deleteTrack(playlist, track) {
-  const playlistSet = new Set(playlist)
-  playlistSet.delete(track)
-  return [...playlistSet]
+  return [...removeDuplicates(playlist.filter(a => a != track))]
 }
 
 /**
@@ -58,5 +57,5 @@ export function deleteTrack(playlist, track) {
  * @returns {string[]} list of artists
  */
 export function listArtists(playlist) {
-  return [...new Set(playlist.map(title => title.split(' - ')[1]))]
+  return [...removeDuplicates(playlist.map(title => title.split(' - ')[1]))]
 }
