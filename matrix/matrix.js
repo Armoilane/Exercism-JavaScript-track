@@ -1,22 +1,22 @@
 export class Matrix {
   constructor(matrix) {
-    this.matrix = matrix // lines.split("\n").map(line => line.split(" "))
+    this.matrix = matrix
   }
 
   get rows() {
-    return this.matrix.split("\n").map(row => row.split(" "))
-      .map(row => row.map(n => Number(n)))
+    return this.matrix.split("\n")
+      .map(row => row.split(" "))
+      .map(row => row.map(Number))
   }
 
   get columns() {
     const columns = []
-    for (let i = 0; i < this.rows[0].length; i++) {
-      let column = []
-      this.rows.forEach(row => {
-        column.push(row[i])
-      })
-      columns.push(column)
+    const rows = this.rows
+
+    for (let i = 0; i < rows[0].length; i++) {
+      columns.push(rows.map(row => row[i]))
     }
+
     return columns
   }
 }
