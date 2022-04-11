@@ -9,7 +9,9 @@ const ORBITAL_PERIOD = {
   neptune: 164.79132,
 }
 
+const EARTH_YEAR_IN_SECONDS = 31557600
+
 export const age = (onPlanet, seconds) => {
-  const spaceAge = seconds / 31557600 / ORBITAL_PERIOD[onPlanet]
+  const spaceAge = seconds / EARTH_YEAR_IN_SECONDS / ORBITAL_PERIOD[onPlanet]
   return Math.round(spaceAge * 100) / 100
-};
+}
