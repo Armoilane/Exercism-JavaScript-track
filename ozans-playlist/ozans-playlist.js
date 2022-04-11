@@ -47,7 +47,7 @@ export function addTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function deleteTrack(playlist, track) {
-  return [...removeDuplicates(playlist.filter(a => a != track))]
+  return removeDuplicates(playlist.filter(a => a != track))
 }
 
 /**
@@ -57,5 +57,5 @@ export function deleteTrack(playlist, track) {
  * @returns {string[]} list of artists
  */
 export function listArtists(playlist) {
-  return [...removeDuplicates(playlist.map(title => title.split(' - ')[1]))]
+  return removeDuplicates(playlist.map(title => title.split(' - ')[1]))
 }
