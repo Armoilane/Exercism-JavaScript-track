@@ -34,7 +34,7 @@ export function hasTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function addTrack(playlist, track) {
-  return [...removeDuplicates([...playlist, track])]
+  return removeDuplicates([...playlist, track])
 }
 
 /**
