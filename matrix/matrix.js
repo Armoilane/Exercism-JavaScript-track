@@ -4,19 +4,13 @@ export class Matrix {
   }
 
   get rows() {
-    return this.matrix.split("\n")
-      .map(row => row.split(" "))
-      .map(row => row.map(Number))
+    return this.matrix.split('\n')
+      .map(row => row.split(' ')
+      .map(Number))
   }
 
   get columns() {
-    const columns = []
     const rows = this.rows
-
-    for (let i = 0; i < rows[0].length; i++) {
-      columns.push(rows.map(row => row[i]))
-    }
-
-    return columns
+    return rows[0].map((_, i) => rows.map(row => row[i]))
   }
 }
