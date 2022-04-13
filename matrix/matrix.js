@@ -5,8 +5,9 @@ export class Matrix {
 
   get rows() {
     return this.matrix.split('\n')
-      .map(row => row.split(' ')
-      .map(Number))
+      .map(row => row
+        .split(' ')
+        .map(Number))
   }
 
   get columns() {
