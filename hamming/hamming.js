@@ -1,8 +1,28 @@
-//
-// This is only a SKELETON file for the 'Hamming' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
+/**
+ * Calculate the hamming distance between two DNA strands.
+ * @param {String} strandA
+ * @param {String} strandB
+ * @returns {Number} hamming distance
+ */
+export const compute = (strandA, strandB) => {
+  if (!equalLengths(strandA, strandB)) {
+    throw new Error('strands must be of equal length')
+  }
 
-export const compute = () => {
-  throw new Error('Remove this statement and implement this function');
-};
+  const strandBrr = strandB.split('')
+
+  return strandA.split('').reduce((hammingCount, nucleotide, index) => {
+    if (nucleotide !== strandBrr[index]) {
+      hammingCount++
+    }
+    return hammingCount
+  }, 0)
+}
+
+/**
+ * Helper function to check if the strands are of equal length.
+ * @param {String} strandA
+ * @param {String} strandB
+ * @return {Boolean}
+ */
+const equalLengths = (strandA, strandB) => strandA.length === strandB.length
