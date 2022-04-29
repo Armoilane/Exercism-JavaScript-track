@@ -1,4 +1,6 @@
 .git
+.eslintrc
+.npmrc
 .exercism
 node_modules
 yarn-error.log
