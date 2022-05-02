@@ -1,8 +1,12 @@
-//
-// This is only a SKELETON file for the 'Word Count' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
-export const countWords = () => {
-  throw new Error('Remove this statement and implement this function');
+/** Word count.
+ * @param {String} phrase A piece of text
+ * @returns {Object} word: count
+ */
+export const countWords = phrase => {
+  return phrase.toLowerCase().match(/(\w+'\w+|\w+)/ig)
+    .reduce((count, word) => {
+      count[word] ? count[word]++ : count[word] = 1
+      return count
+    }, {})
 };
+
