@@ -5,12 +5,13 @@
  * @returns {Array} The anagrams
  */
 export const findAnagrams = (subject, wordList) => {
-  const subjectLetters = normalize(subject)
+  const normalizedSubject = normalize(subject)
 
   return wordList.filter((word) =>
     word.toLowerCase() !== subject.toLowerCase() &&
     word.length === subject.length &&
-    normalize(word).every((char, i) => char === subjectLetters[i]))
+    normalize(word) === normalizedSubject
+  )
 };
 
 /**
@@ -18,5 +19,5 @@ export const findAnagrams = (subject, wordList) => {
  * @param {String} word
  * @returns {Array} The letters
  */
-const normalize = word => word.toLowerCase().split('').sort()
+const normalize = word => word.toLowerCase().split('').sort().join('')
 
