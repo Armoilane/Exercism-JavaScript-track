@@ -5,7 +5,11 @@
 export const countWords = phrase => {
   return phrase.toLowerCase().match(/(\w+'\w+|\w+)/ig)
     .reduce((counts, word) => {
-      counts[word] = counts[word] ? counts[word] + 1 : 1
+      if (counts[word]) {
+        counts[word]++
+      } else {
+        counts[word] = 1
+      }
       return counts
     }, {})
 };
