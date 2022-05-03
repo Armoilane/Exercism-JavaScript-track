@@ -12,8 +12,7 @@ export const compute = (strandA, strandB) => {
   const strandBNucleotides = strandB.split('')
 
   return strandA.split('').reduce((hammingCount, nucleotide, index) =>
-    nucleotide !== strandBNucleotides[index] ?
-      ++hammingCount : hammingCount
+    nucleotide !== strandBNucleotides[index] ? hammingCount + 1 : hammingCount
     , 0)
 }
 
