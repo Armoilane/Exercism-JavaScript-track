@@ -1,22 +1,29 @@
-//
-// This is only a SKELETON file for the 'Difference Of Squares' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
+/**
+ * Class to calculate the difference between square of sums and sum of squares.
+ */
 export class Squares {
-  constructor() {
-    throw new Error('Remove this statement and implement this function');
+  constructor(n) {
+    this.n = n
   }
 
   get sumOfSquares() {
-    throw new Error('Remove this statement and implement this function');
+    let sum = 0
+    for (let i = this.n; i > 0; i--) {
+      sum += i**2
+    }
+    return sum
   }
 
   get squareOfSum() {
-    throw new Error('Remove this statement and implement this function');
+    let sum = 0
+    for (let i = this.n; i > 0; i--) {
+      sum += i
+    }
+    return sum**2
   }
 
   get difference() {
-    throw new Error('Remove this statement and implement this function');
+    return this.squareOfSum - this.sumOfSquares
   }
 }
+
