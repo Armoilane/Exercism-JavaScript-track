@@ -8,17 +8,21 @@ export class Squares {
 
   get sumOfSquares() {
     let sum = 0
-    for (let i = this.n; i > 0; i--) {
+
+    for (let i = 1 ; i <= this.n; i++) {
       sum += i**2
     }
+
     return sum
   }
 
   get squareOfSum() {
     let sum = 0
-    for (let i = this.n; i > 0; i--) {
+
+    for (let i = 1; i <= this.n ; i++) {
       sum += i
     }
+
     return sum**2
   }
 
