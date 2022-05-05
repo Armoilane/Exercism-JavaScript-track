@@ -5,7 +5,7 @@
  */
 export const parse = phrase => {
   return phrase.split(/[^a-zA-Z']/)
-    .map(word => word.charAt(0))
+    .map(word => word[0])
     .join('')
     .toUpperCase()
 }
