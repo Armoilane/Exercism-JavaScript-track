@@ -1,5 +1,4 @@
 import { runInNewContext, runInContext } from "vm";
-import { isNullOrUndefined } from "util";
 
 export const convert = (digits, fromBase, newBase) => {
 
@@ -13,9 +12,9 @@ export const convert = (digits, fromBase, newBase) => {
 
   if ( fromBaseIsOneOrLess || fromBaseIsNotInteger ) {
     throw Error("Wrong input base");
-  }  
+  }
 
-  if ( newBaseIsOneOrLess || newBaseIsNotInteger ) {
+  if ( newBaseIsOneOrLess || newBaseIsNotInteger ) {
     throw Error("Wrong output base");
   }
 
@@ -43,12 +42,12 @@ export const convert = (digits, fromBase, newBase) => {
   }
 
   let n = 0;
-  
+
   function findLargestExponent() {
     let m = 0;
     for (let i = 0; m < temp; i++) {
       m = newBase ** i;
-      n = i;      
+      n = i;
     }
   }
   

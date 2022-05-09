@@ -31,13 +31,11 @@ export const translate = rnaStrand => {
     let protein = PROTEINS[strandCodons[i]]
 
     if (!protein) {
-      throw "Invalid codon"
+      throw new Error('Invalid codon')
     }
-
-    if (protein === 'STOP' ) {
+    if (protein === 'STOP') {
       break
     }
-
     translatedCodons.push(protein)
   }
 
