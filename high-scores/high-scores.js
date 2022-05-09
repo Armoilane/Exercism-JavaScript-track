@@ -1,26 +1,33 @@
-//
-// This is only a SKELETON file for the 'High Scores' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
 export class HighScores {
-  constructor() {
-    throw new Error('Remove this statement and implement this function');
+
+  constructor(scoreList) {
+    this.list = scoreList
   }
 
   get scores() {
-    throw new Error('Remove this statement and implement this function');
+    return this.list
   }
 
   get latest() {
-    throw new Error('Remove this statement and implement this function');
+    return Number(this.list.slice(-1))
   }
 
   get personalBest() {
-    throw new Error('Remove this statement and implement this function');
+    return this.maxScore(this.list)
   }
 
   get personalTopThree() {
-    throw new Error('Remove this statement and implement this function');
+    return this.list.sort((a, b) => b - a).slice(0, 3)
+  }
+
+  /**
+   * Parses the highest score from the array of scores
+   * @param {Array} scorelist contains integers
+   * @returns {Number}
+   */
+  maxScore(scorelist) {
+    return scorelist.reduce(function(a, b) {
+      return Math.max(a, b)
+    }, -Infinity)
   }
 }
