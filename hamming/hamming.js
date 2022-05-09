@@ -9,14 +9,11 @@ export const compute = (strandA, strandB) => {
     throw new Error('strands must be of equal length')
   }
 
-  const strandBrr = strandB.split('')
+  const strandBNucleotides = strandB.split('')
 
-  return strandA.split('').reduce((hammingCount, nucleotide, index) => {
-    if (nucleotide !== strandBrr[index]) {
-      hammingCount++
-    }
-    return hammingCount
-  }, 0)
+  return strandA.split('').reduce((hammingCount, nucleotide, index) =>
+    nucleotide !== strandBNucleotides[index] ? hammingCount + 1 : hammingCount
+    , 0)
 }
 
 /**
@@ -26,3 +23,4 @@ export const compute = (strandA, strandB) => {
  * @return {Boolean}
  */
 const equalLengths = (strandA, strandB) => strandA.length === strandB.length
+
