@@ -14,4 +14,3 @@ export const transform = old => {
 
   return transformed
 };
-

@@ -1,6 +1,8 @@
 export class HighScores {
+
   constructor(scoreList) {
     this.list = scoreList
+    this.topThreeScores = [...scoreList].sort((a, b) => b - a).slice(0, 3)
   }
 
   get scores() {
@@ -12,22 +14,11 @@ export class HighScores {
   }
 
   get personalBest() {
-    return this.maxScore(this.list)
+    return this.topThreeScores[0]
   }
 
   get personalTopThree() {
-    return this.list.sort((a, b) => b - a).slice(0, 3)
-  }
-
-  /**
-   * Parses the highest score from the array of scores
-   * @param {Array} scorelist contains integers
-   * @returns {Number}
-   */
-  maxScore(scorelist) {
-    return scorelist.reduce(function(a, b) {
-      return Math.max(a, b)
-    }, -Infinity)
+    return this.topThreeScores
   }
 
 }

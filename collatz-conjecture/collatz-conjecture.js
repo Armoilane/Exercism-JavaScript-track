@@ -4,7 +4,7 @@
  * @param {Number} n any positive integer
  * @returns {Number} number of cycles it took to get to 1
  */
-export const steps = (n, count = 0) => {
+export const steps = n => {
   if (n < 1) {
     throw new Error('Only positive numbers are allowed')
   }
@@ -12,5 +12,6 @@ export const steps = (n, count = 0) => {
     return count
   }
 
-  return steps(n % 2 === 0 ? n / 2 : n * 3 + 1, count + 1)
+  return [n].reduce((counter) =>  )
 }
+
