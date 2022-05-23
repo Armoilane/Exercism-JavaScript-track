@@ -1,6 +1,7 @@
 export class BankAccount {
   constructor() {
     this.accountOpen = false
+    this.accountBalance = 'New account'
   }
 
   open() {
@@ -8,8 +9,8 @@ export class BankAccount {
       throw new ValueError
     }
 
-    this.accountOpen = true
     this.accountBalance = 0
+    this.accountOpen = true
   }
 
   close() {
