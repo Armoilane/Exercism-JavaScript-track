@@ -2,7 +2,6 @@ export class HighScores {
 
   constructor(scoreList) {
     this.list = scoreList
-    this.topThreeScores = [...scoreList].sort((a, b) => b - a).slice(0, 3)
   }
 
   get scores() {
@@ -10,15 +9,15 @@ export class HighScores {
   }
 
   get latest() {
-    return Number(this.list.slice(-1))
+    return this.list.slice(-1)[0]
   }
 
   get personalBest() {
-    return this.topThreeScores[0]
+    return this.personalTopThree[0]
   }
 
   get personalTopThree() {
-    return this.topThreeScores
+    return [...this.list].sort((a, b) => b - a).slice(0, 3)
   }
 
 }
