@@ -22,13 +22,11 @@ const shift = (code, rotation) => {
     return (code + rotation - 65) % 26 + 65
   }
 
-  else if (96 < code && code < 123) {
+  if (96 < code && code < 123) {
     return (code + rotation - 97) % 26 + 97
   }
 
-  else {
-    return code
-  }
+  return code
 
 }
 
