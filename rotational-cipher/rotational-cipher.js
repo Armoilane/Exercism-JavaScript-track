@@ -3,12 +3,12 @@
  * @param {String} phrase to cipher
  * @returns {String} ciphered phrase
  */
-
 export const rotate = (phrase, rotation) => {
-  return phrase.split('')
-    .map(char => shift(char.codePointAt(0), rotation))
-    .map(code => String.fromCharCode(code))
-    .join('')
+  return String.fromCharCode(
+    ...phrase
+      .split('')
+      .map(char => shift(char.codePointAt(0), rotation))
+  )
 }
 
 
@@ -27,6 +27,5 @@ const shift = (code, rotation) => {
   }
 
   return code
-
 }
 
