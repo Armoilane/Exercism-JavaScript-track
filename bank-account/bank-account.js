@@ -1,7 +1,7 @@
 export class BankAccount {
   constructor() {
     this.accountOpen = false
-    this.accountBalance = 'New account'
+    this.accountBalance = 0
   }
 
   open() {
