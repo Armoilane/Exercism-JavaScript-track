@@ -9,8 +9,9 @@ export const transform = old => {
   let transformed = {}
 
   for (const [key, value] of Object.entries(old)) {
-    value.map(char => transformed[char.toLowerCase()] = Number.parseInt(key))
+    value.map(char => transformed[char.toLowerCase()] = Number(key))
   }
 
   return transformed
 };
+
