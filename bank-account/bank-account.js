@@ -1,31 +1,48 @@
-//
-// This is only a SKELETON file for the 'Bank Account' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
 export class BankAccount {
   constructor() {
-    throw new Error('Remove this statement and implement this function');
+    this.accountOpen = false
+    this.accountBalance = 0
   }
 
   open() {
-    throw new Error('Remove this statement and implement this function');
+    if (this.accountOpen) {
+      throw new ValueError
+    }
+
+    this.accountBalance = 0
+    this.accountOpen = true
   }
 
   close() {
-    throw new Error('Remove this statement and implement this function');
+    if (!this.accountOpen) {
+      throw new ValueError
+    }
+
+    this.accountOpen = false
   }
 
-  deposit() {
-    throw new Error('Remove this statement and implement this function');
+  deposit(amount) {
+    if (amount < 0 || !this.accountOpen) {
+      throw new ValueError
+    }
+
+    this.accountBalance += amount
   }
 
-  withdraw() {
-    throw new Error('Remove this statement and implement this function');
+  withdraw(amount) {
+    if (amount < 0 || amount > this.accountBalance || !this.accountOpen) {
+      throw new ValueError
+    }
+
+    this.accountBalance -= amount
   }
 
   get balance() {
-    throw new Error('Remove this statement and implement this function');
+    if (!this.accountOpen) {
+      throw new ValueError
+    }
+
+    return this.accountBalance
   }
 }
 
