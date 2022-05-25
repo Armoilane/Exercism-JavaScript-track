@@ -6,9 +6,7 @@
 export const isArmstrongNumber = n => {
   let numbers = String(n).split('').map(Number)
   let power = numbers.length
-  let powers = numbers.map(n => n ** power)
-  let sumOfPowers = powers.reduce((sum, n) => sum + n, 0)
 
-  return sumOfPowers === n
+  return n === numbers.map(n => n ** power).reduce((sum, n) => sum + n, 0)
 }
 
