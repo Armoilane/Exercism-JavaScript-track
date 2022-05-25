@@ -8,10 +8,6 @@ export const steps = n => {
   if (n < 1) {
     throw new Error('Only positive numbers are allowed')
   }
-  if (n === 1) {
-    return count
-  }
 
-  return [n].reduce((counter) =>  )
+  return n > 1 ? steps(!(n % 2) ? n / 2 : 3 * n + 1) + 1 : 0
 }
-
