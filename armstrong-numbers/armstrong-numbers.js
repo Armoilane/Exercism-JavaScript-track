@@ -1,8 +1,14 @@
-//
-// This is only a SKELETON file for the 'Armstrong Numbers' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
+/**
+ * Armstrong numbers
+ * @param {Integer} n
+ * @returns {Boolean}
+ */
+export const isArmstrongNumber = n => {
+  let numbers = String(n).split('').map(Number)
+  let power = numbers.length
+  let powers = numbers.map(n => n ** power)
+  let sumOfPowers = powers.reduce((sum, n) => sum + n, 0)
 
-export const isArmstrongNumber = () => {
-  throw new Error('Remove this statement and implement this function');
-};
+  return sumOfPowers === n
+}
+
