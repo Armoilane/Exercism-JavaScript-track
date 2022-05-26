@@ -4,9 +4,9 @@
  * @returns {Boolean}
  */
 export const isArmstrongNumber = n => {
-  let numbers = String(n).split('').map(Number)
-  let power = numbers.length
+  let digits = String(n).split('').map(Number)
+  let power = digits.length
 
-  return n === numbers.map(n => n ** power).reduce((sum, n) => sum + n, 0)
+  return n === digits.map(n => n ** power).reduce((sum, n) => sum + n, 0)
 }
 
