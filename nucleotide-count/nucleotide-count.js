@@ -6,11 +6,12 @@
 export function countNucleotides([...strand]) {
   const NUCLEOTIDES = ['A', 'C', 'G', 'T']
 
-  if (!strand.every(nucleotide => NUCLEOTIDES.includes(nucleotide))) {
-    throw new Error('Invalid nucleotide in strand')
-  }
+  return strand.reduce((counts, nucleotide) => {
+    if (!NUCLEOTIDES.includes(nucleotide)) {
+      throw new Error('Invalid nucleotide in strand')
+    }
 
-  return strand.reduce((counts, nucleotide) =>
-    ++counts[NUCLEOTIDES.indexOf(nucleotide)] && counts, [0, 0, 0, 0]).join(' ')
+    return ++counts[NUCLEOTIDES.indexOf(nucleotide)] && counts
+  }, [0, 0, 0, 0]).join(' ')
 }
 
