@@ -3,18 +3,14 @@
  * @param {String} strand
  * @returns {String} The counts separated with spaces '0 0 0 0'
  */
-export function countNucleotides(strand) {
-  const VALIDNUCLEOTIDES = ['A', 'C', 'G', 'T']
-  const COUNTS = {A: 0, C: 0, G: 0, T: 0}
-  const nucleotides = strand.split('')
+export function countNucleotides([...strand]) {
+  const NUCLEOTIDES = ['A', 'C', 'G', 'T']
 
-  if (!nucleotides.every(n => VALIDNUCLEOTIDES.includes(n))) {
+  if (!strand.every(nucleotide => NUCLEOTIDES.includes(nucleotide))) {
     throw new Error('Invalid nucleotide in strand')
   }
 
-  nucleotides.map(nucleotide => COUNTS[nucleotide]++)
-
-  return Object.values(COUNTS).join(' ')
-
+  return strand.reduce((counts, nucleotide) =>
+    ++counts[NUCLEOTIDES.indexOf(nucleotide)] && counts, [0, 0, 0, 0]).join(' ')
 }
 
