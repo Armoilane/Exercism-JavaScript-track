@@ -28,15 +28,16 @@ export const classify = n => {
  *  @param {Integer} n
  *  @returns {Integer}
  */
-const sumFactors = n => {
-  let factors = []
+const sumFactors = n =>
+  rangeUpTo(Math.floor(n / 2))
+    .filter(i => !(n % i))
+    .reduce((sum, n) => sum + n, 0)
 
-  for (let i = 1; i < n; i++) {
-    if (!(n % i)) {
-      factors.push(i)
-    }
-  }
 
-  return factors.reduce((sum, n) => sum + n, 0)
-}
+/**
+ * Returns an array of consecutive integers up to n from one
+ * @param {Integer} n
+ * @returns {Array}
+ */
+const rangeUpTo = n => new Array(n).fill(1).map((n, index) => n + index)
 
