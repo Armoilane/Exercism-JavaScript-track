@@ -4,7 +4,7 @@
  */
 export class Series {
   constructor(series) {
-    this.series = series
+    this.series = [...series].map(Number)
     this.seriesLength = series.length
   }
 
@@ -21,16 +21,12 @@ export class Series {
 
     this.validate(sliceLength)
 
-    let allSeries = []
-
-    for (let i = 0; i < this.seriesLength - sliceLength + 1; i++) {
-      allSeries
-        .push(this.series.substring(i, (i + sliceLength))
-        .split('')
-        .map(Number))
-    }
-
-    return allSeries
+    return this.series.reduce((allSeries, element, index, array) => {
+      if (index + sliceLength <= this.seriesLength) {
+        allSeries.push(array.slice(index, index + sliceLength))
+      }
+      return allSeries
+    }, [])
   }
 
 
