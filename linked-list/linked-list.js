@@ -1,30 +1,119 @@
-//
-// This is only a SKELETON file for the 'Linked List' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
+/**
+ * A doubly linked list implemented with class.
+ * Includes methods push(), pop(), shift(), unshift(), delete() and count()
+ * Doesn't include methods to add in the middle of the list.
+ * Delete by value, not index. Deletes the first occurrence.
+ */
 export class LinkedList {
-  push() {
-    throw new Error('Remove this statement and implement this function');
+  constructor() {
+    this.head = null
+    this.tail = null
+    this.length = 0
   }
+
+
+  push(data) {
+    let node = new this.Node(data)
+
+    if (this.head === null) {
+      this.head = node
+      this.tail = node
+      this.length++
+      return
+    }
+
+    let currentTail = this.tail || this.head
+
+    node.prev = currentTail
+    currentTail.next = node
+    this.tail = node
+    this.length++
+  }
+
 
   pop() {
-    throw new Error('Remove this statement and implement this function');
+    let currentTail = this.tail
+    this.tail = currentTail.prev
+    this.length--
+    return currentTail.data
   }
+
 
   shift() {
-    throw new Error('Remove this statement and implement this function');
+    let currentHead = this.head
+    this.head = currentHead.next
+    this.length--
+    return currentHead.data
   }
 
-  unshift() {
-    throw new Error('Remove this statement and implement this function');
+
+  unshift(data) {
+    let node = new this.Node(data)
+
+    if (this.head === null) {
+      this.head = node
+      this.tail = node
+      this.length++
+    }
+
+    let currentHead = this.head
+
+    currentHead.prev = node
+    node.next = currentHead
+    this.head = node
+    this.length++
   }
 
-  delete() {
-    throw new Error('Remove this statement and implement this function');
+
+  delete(data) {
+    let currentNode = this.head
+
+    while (currentNode.data !== data) {
+      if (currentNode.next === null) {
+        return
+      }
+
+      currentNode = currentNode.next
+    }
+
+    if (currentNode.prev === null) {
+      if (currentNode.next === null) {
+        this.head = null
+        this.tail = null
+        this.length--
+        return
+      }
+
+      currentNode.next.prev = null
+      this.head = currentNode.next
+      this.length--
+      return
+    }
+
+    if (currentNode.next === null) {
+      currentNode.prev.next = null
+      this.tail = currentNode.prev
+      this.length--
+      return
+    }
+
+    currentNode.next.prev = currentNode.prev
+    currentNode.prev.next = currentNode.next
+    this.length--
   }
+
 
   count() {
-    throw new Error('Remove this statement and implement this function');
+    return this.length
   }
 }
+
+
+LinkedList.prototype.Node = class {
+  constructor(data) {
+    this.data = data
+    this.next = null
+    this.prev = null
+  }
+}
+
