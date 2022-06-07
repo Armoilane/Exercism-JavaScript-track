@@ -8,33 +8,34 @@ export class LinkedList {
   constructor() {
     this.head = null
     this.tail = null
-    this.length = 0
   }
 
 
   push(data) {
-    let node = new this.Node(data)
+    let node = new Node(data)
 
     if (this.head === null) {
       this.head = node
       this.tail = node
-      this.length++
       return
     }
 
-    let currentTail = this.tail || this.head
-
-    node.prev = currentTail
-    currentTail.next = node
+    node.prev = this.tail
+    this.tail.next = node
     this.tail = node
-    this.length++
   }
 
 
   pop() {
     let currentTail = this.tail
+
+    if (this.head === currentTail) {
+      this.head = null
+      this.tail = null
+      return currentTail.data
+    }
+
     this.tail = currentTail.prev
-    this.length--
     return currentTail.data
   }
 
@@ -42,18 +43,16 @@ export class LinkedList {
   shift() {
     let currentHead = this.head
     this.head = currentHead.next
-    this.length--
     return currentHead.data
   }
 
 
   unshift(data) {
-    let node = new this.Node(data)
+    let node = new Node(data)
 
     if (this.head === null) {
       this.head = node
       this.tail = node
-      this.length++
     }
 
     let currentHead = this.head
@@ -61,7 +60,6 @@ export class LinkedList {
     currentHead.prev = node
     node.next = currentHead
     this.head = node
-    this.length++
   }
 
 
@@ -80,36 +78,40 @@ export class LinkedList {
       if (currentNode.next === null) {
         this.head = null
         this.tail = null
-        this.length--
         return
       }
 
       currentNode.next.prev = null
       this.head = currentNode.next
-      this.length--
       return
     }
 
     if (currentNode.next === null) {
       currentNode.prev.next = null
       this.tail = currentNode.prev
-      this.length--
       return
     }
 
     currentNode.next.prev = currentNode.prev
     currentNode.prev.next = currentNode.next
-    this.length--
   }
 
 
   count() {
-    return this.length
+    let node = this.head
+    let count = 0
+
+    while (node != null) {
+      count++
+      node = node.next
+    }
+
+    return count
   }
 }
 
 
-LinkedList.prototype.Node = class {
+class Node {
   constructor(data) {
     this.data = data
     this.next = null
