@@ -20,8 +20,8 @@ export class LinkedList {
       return
     }
 
-    node.prev = this.tail
-    this.tail.next = node
+    node.setPrev(this.tail)
+    this.tail.setNext(node)
     this.tail = node
   }
 
@@ -57,8 +57,8 @@ export class LinkedList {
 
     let currentHead = this.head
 
-    currentHead.prev = node
-    node.next = currentHead
+    currentHead.setPrev(node)
+    node.setNext(currentHead)
     this.head = node
   }
 
@@ -81,19 +81,19 @@ export class LinkedList {
         return
       }
 
-      currentNode.next.prev = null
+      currentNode.next.setPrev(null)
       this.head = currentNode.next
       return
     }
 
     if (currentNode.next === null) {
-      currentNode.prev.next = null
+      currentNode.prev.setNext(null)
       this.tail = currentNode.prev
       return
     }
 
-    currentNode.next.prev = currentNode.prev
-    currentNode.prev.next = currentNode.next
+    currentNode.next.setPrev(currentNode.prev)
+    currentNode.prev.setNext(currentNode.next)
   }
 
 
@@ -116,6 +116,14 @@ class Node {
     this.data = data
     this.next = null
     this.prev = null
+  }
+
+  setNext(node) {
+    this.next = node
+  }
+
+  setPrev(node) {
+    this.prev = node
   }
 }
 
